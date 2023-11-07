@@ -1,20 +1,23 @@
-// Récupération de l'élément "tous" en utilisant sa classe
+// Sélectionnez l'élément HTML avec la classe "tous" et stockez-le dans la variable "tous"
 const tous = document.querySelector(".tous");
 
-// Récupération de l'élément de la galerie
+// Sélectionnez l'élément HTML avec la classe "gallery" et stockez-le dans la variable "galerie"
 const galerie = document.querySelector(".gallery");
 
-// Ajout d'une variable pour suivre l'état du bouton
+// Créez une variable booléenne "isTousClicked" et initialisez-la à "false"
 let isTousClicked = false;
 
-// Fonction pour charger les projets
+// Définition de la fonction "chargerProjets" qui récupère les projets depuis une API
 function chargerProjets() {
-    // Utilisez fetch pour récupérer les données depuis votre API
+    // Effectuez une requête HTTP GET pour récupérer les données des projets depuis une URL
     fetch("http://localhost:5678/api/works")
-        .then(response => response.json())
+        .then(response => response.json()) // Parsez la réponse HTTP en JSON
         .then(data => {
+            // Réinitialisez le contenu de la galerie à vide
+            galerie.innerHTML = "";
+            
+            // Parcourez les données des projets et créez des éléments HTML pour les afficher
             data.forEach(projet => {
-                console.log("Projet : ", projet);
                 const figure = document.createElement("figure");
                 const img = document.createElement("img");
                 img.src = projet.imageUrl;
@@ -27,123 +30,110 @@ function chargerProjets() {
             });
         })
         .catch(error => {
+            // En cas d'erreur, affichez un message d'erreur dans la console
             console.error("Une erreur s'est produite lors de la récupération des données :", error);
         });
 }
 
-// Fonction pour activer/désactiver le bouton "Tous"
+// Sélectionnez le bouton "Tous" et changez son style pour simuler un clic
+tous.style.backgroundColor = "#1D6154";
+tous.style.color = "white";
+chargerProjets(); // Chargez les projets
+isTousClicked = true; // Définissez "isTousClicked" à "true"
+
+// Définition de la fonction "toggleTousButton" qui gère le bouton "Tous"
 function toggleTousButton() {
+    // Vider la galerie en réinitialisant son contenu
+    galerie.innerHTML = "";
+
     if (isTousClicked) {
-        // Si "tous" est déjà cliqué, réinitialisez les couleurs et videz la galerie
+        // Désélectionnez les autres boutons de catégorie en réinitialisant leur style
+        categoryButtons.forEach(btn => {
+            btn.style.backgroundColor = "white";
+            btn.style.color = "#1D6154";
+        });
+
+        // Rétablissez le style du bouton "Tous" pour le désélectionner
         tous.style.backgroundColor = "white";
         tous.style.color = "#1D6154";
-        galerie.innerHTML = "";
-        isTousClicked = false; // Réinitialisez l'état
+        isTousClicked = false; // Réglez "isTousClicked" à "false"
     } else {
-        // Sinon, changez la couleur de fond de l'élément "tous" au clic
+        // Sélectionnez le bouton "Tous" en changeant son style
         tous.style.backgroundColor = "#1D6154";
         tous.style.color = "white";
+        chargerProjets(); // Chargez à nouveau les projets
+        isTousClicked = true; // Réglez "isTousClicked" à "true"
 
-        // Appelez la fonction pour charger les projets
-        chargerProjets();
-
-        isTousClicked = true; // Mettez à jour l'état
+        // Rétablissez le style de base des autres boutons de catégorie
+        categoryButtons.forEach(btn => {
+            btn.style.backgroundColor = "white";
+            btn.style.color = "#1D6154";
+        });
     }
 }
 
-// Ajout d'un gestionnaire d'événements au clic sur l'élément "tous"
+// Ajoutez un écouteur d'événement pour le bouton "Tous" qui appelle la fonction "toggleTousButton" lors du clic
 tous.addEventListener("click", toggleTousButton);
 
-// Appel initial de la fonction pour activer le bouton "Tous"
-toggleTousButton();
-
-
-
-
-//----------------------------------------------------------------------------------
-
-// Sélectionnez les boutons categoryId par leur classe
+// Sélectionnez tous les éléments HTML avec la classe "category-item" et stockez-les dans la variable "categoryButtons"
 const categoryButtons = document.querySelectorAll(".category-item");
 
-// Créez une fonction pour filtrer et afficher les projets en fonction de la categoryId
+// Définition de la fonction "filterAndDisplayProjects" pour filtrer et afficher des projets en fonction de la catégorie
 function filterAndDisplayProjects(categoryId) {
-  fetch("http://localhost:5678/api/works")
-    .then(response => response.json())
-    .then(data => {
-      // Filtrer les projets en fonction de la categoryId
-      const filteredProjects = data.filter(projet => projet.categoryId === parseInt(categoryId));
-
-      // Effacez le contenu actuel de la galerie
-      galerie.innerHTML = "";
-
-      // Affichez les projets correspondants dans la galerie
-      filteredProjects.forEach(projet => {
-        const figure = document.createElement("figure");
-        const img = document.createElement("img");
-        img.src = projet.imageUrl;
-        img.alt = projet.title;
-        const figcaption = document.createElement("figcaption");
-        figcaption.textContent = projet.title;
-        figure.appendChild(img);
-        figure.appendChild(figcaption);
-        galerie.appendChild(figure);
-      });
-    })
-    .catch(error => {
-      console.error("Une erreur s'est produite lors de la récupération des données :", error);
-    });
+    fetch("http://localhost:5678/api/works")
+        .then(response => response.json())
+        .then(data => {
+            galerie.innerHTML = ""; // Réinitialisez le contenu de la galerie
+            
+            // Filtrez les projets en fonction de la catégorie sélectionnée et affichez-les
+            data
+                .filter(projet => projet.categoryId === parseInt(categoryId))
+                .forEach(projet => {
+                    const figure = document.createElement("figure");
+                    const img = document.createElement("img");
+                    img.src = projet.imageUrl;
+                    img.alt = projet.title;
+                    const figcaption = document.createElement("figcaption");
+                    figcaption.textContent = projet.title;
+                    figure.appendChild(img);
+                    figure.appendChild(figcaption);
+                    galerie.appendChild(figure);
+                });
+        })
+        .catch(error => {
+            // En cas d'erreur, affichez un message d'erreur dans la console
+            console.error("Une erreur s'est produite lors de la récupération des données :", error);
+        });
 }
 
-// Ajoutez un gestionnaire d'événements au clic de chaque bouton categoryId
+// Ajoutez des écouteurs d'événement aux boutons de catégorie pour filtrer et afficher les projets
 categoryButtons.forEach(button => {
-  button.addEventListener("click", function () {
-    const categoryId = this.getAttribute("data-category");
-    filterAndDisplayProjects(categoryId);
-  });
-});
-
-// Maintenez le code d'origine pour le bouton "Tous"
-tous.addEventListener("click", function () {
-  // ...
-});
-// ---------------------------------
-// Créez une variable pour suivre l'état du bouton actif
-let activeCategoryId = null;
-
-// Ajoutez un gestionnaire d'événements au clic de chaque bouton categoryId
-categoryButtons.forEach(button => {
-  button.addEventListener("click", function () {
-    const categoryId = this.getAttribute("data-category");
-
-    // Réinitialisez la couleur de fond et du texte de tous les boutons categoryId
-    categoryButtons.forEach(btn => {
-      btn.style.backgroundColor = "white";
-      btn.style.color = "#1D6154";
+    button.addEventListener("click", function () {
+        const categoryId = this.getAttribute("data-category");
+        filterAndDisplayProjects(categoryId);
+        isTousClicked = false; // Réglez "isTousClicked" à "false"
+        tous.style.backgroundColor = "white";
+        tous.style.color = "#1D6154";
     });
-
-    // Si le bouton "Tous" est déjà cliqué, réinitialisez les couleurs et videz la galerie
-    if (isTousClicked) {
-      tous.style.backgroundColor = "white";
-      tous.style.color = "#1D6154";
-      galerie.innerHTML = "";
-      isTousClicked = false;
-    }
-
-    // Si le bouton actif est le même que le bouton cliqué, désactivez-le
-    if (activeCategoryId === categoryId) {
-      activeCategoryId = null;
-    } else {
-      // Sinon, changez la couleur de fond et du texte du bouton cliqué
-      this.style.backgroundColor = "#1D6154";
-      this.style.color = "white";
-      activeCategoryId = categoryId;
-    }
-
-    // Appelez la fonction pour filtrer et afficher les projets en fonction de la categoryId
-    if (activeCategoryId) {
-      filterAndDisplayProjects(activeCategoryId);
-    }
-  });
 });
 
+// Ajoutez des écouteurs d'événement aux boutons de catégorie pour gérer le style lors du clic
+categoryButtons.forEach(button => {
+    button.addEventListener("click", function () {
+        const categoryId = this.getAttribute("data-category");
+        filterAndDisplayProjects(categoryId);
+        isTousClicked = false; // Réglez "isTousClicked" à "false"
+        tous.style.backgroundColor = "white";
+        tous.style.color = "#1D6154";
 
+        // Réinitialisez le style de fond et de texte de tous les boutons de catégorie
+        categoryButtons.forEach(btn => {
+            btn.style.backgroundColor = "white";
+            btn.style.color = "#1D6154";
+        });
+
+        // Changez le style de fond du bouton cliqué
+        this.style.backgroundColor = "#1D6154";
+        this.style.color = "white";
+    });
+});
