@@ -37,6 +37,7 @@ form.addEventListener('submit', function (event) {
       if (data.token) {
         // Authentification réussie : rediriger l'utilisateur vers la page d'accueil
         window.location.href = 'index.html';
+        localStorage.token= data.token
       } else {
         // Authentification échouée : afficher un message d'erreur
         alert('Échec de la connexion. Veuillez vérifier vos informations.');

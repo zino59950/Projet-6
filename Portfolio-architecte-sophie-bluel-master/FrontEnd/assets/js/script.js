@@ -1,4 +1,8 @@
+
+let allWorks = []
+
 // Sélectionnez l'élément HTML avec la classe "tous" et stockez-le dans la variable "tous"
+
 const tous = document.querySelector(".tous");
 
 // Sélectionnez l'élément HTML avec la classe "gallery" et stockez-le dans la variable "galerie"
@@ -15,7 +19,7 @@ function chargerProjets() {
         .then(data => {
             // Réinitialisez le contenu de la galerie à vide
             galerie.innerHTML = "";
-            
+            allWorks=data
             // Parcourez les données des projets et créez des éléments HTML pour les afficher
             data.forEach(projet => {
                 const figure = document.createElement("figure");
@@ -137,3 +141,12 @@ categoryButtons.forEach(button => {
         this.style.color = "white";
     });
 });
+
+const modifier = document.querySelector(".modifier")
+const categorylist = document.querySelector(".category-list")
+if (localStorage.token) {
+
+    modifier.style.display = "inline-block"
+
+    categorylist.style.display = "none"
+}
