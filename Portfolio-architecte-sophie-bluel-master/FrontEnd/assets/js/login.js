@@ -1,11 +1,7 @@
-// Récupération des éléments du formulaire
-const form = document.querySelector('form');
-const emailInput = document.getElementById('email');
-const passwordInput = document.getElementById('pass');
-
 // Événement de soumission du formulaire
 form.addEventListener('submit', function (event) {
   event.preventDefault(); // Empêche la soumission du formulaire
+
 
   // Récupération des valeurs saisies par l'utilisateur
   const email = emailInput.value;
@@ -13,7 +9,6 @@ form.addEventListener('submit', function (event) {
 
   // Vous pouvez maintenant effectuer une validation côté client ici
   // Par exemple, vérifier si les champs ne sont pas vides
-
   if (!email || !password) {
     alert('Veuillez remplir tous les champs.');
     return;
@@ -37,7 +32,7 @@ form.addEventListener('submit', function (event) {
       if (data.token) {
         // Authentification réussie : rediriger l'utilisateur vers la page d'accueil
         window.location.href = 'index.html';
-        localStorage.token= data.token
+        localStorage.token = data.token;
       } else {
         // Authentification échouée : afficher un message d'erreur
         alert('Échec de la connexion. Veuillez vérifier vos informations.');
@@ -48,6 +43,11 @@ form.addEventListener('submit', function (event) {
       alert('Une erreur est survenue lors de l\'authentification.');
     });
 });
+
+// Récupération des éléments du formulaire
+const form = document.querySelector('form');
+const emailInput = document.getElementById('email');
+const passwordInput = document.getElementById('pass');
 
 // Lien "Mot de passe oublié"
 const forgotPasswordLink = document.querySelector('.mp-forget');
