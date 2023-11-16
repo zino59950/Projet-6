@@ -1,3 +1,9 @@
+// Récupération des éléments du formulaire
+const form = document.querySelector('form');
+const emailInput = document.getElementById('email');
+const passwordInput = document.getElementById('pass');
+
+
 // Événement de soumission du formulaire
 form.addEventListener('submit', function (event) {
   event.preventDefault(); // Empêche la soumission du formulaire
@@ -7,12 +13,14 @@ form.addEventListener('submit', function (event) {
   const email = emailInput.value;
   const password = passwordInput.value;
 
+
   // Vous pouvez maintenant effectuer une validation côté client ici
   // Par exemple, vérifier si les champs ne sont pas vides
   if (!email || !password) {
     alert('Veuillez remplir tous les champs.');
     return;
   }
+
 
   // Envoi des données d'authentification à l'API
   fetch('http://localhost:5678/api/users/login', {
@@ -44,10 +52,6 @@ form.addEventListener('submit', function (event) {
     });
 });
 
-// Récupération des éléments du formulaire
-const form = document.querySelector('form');
-const emailInput = document.getElementById('email');
-const passwordInput = document.getElementById('pass');
 
 // Lien "Mot de passe oublié"
 const forgotPasswordLink = document.querySelector('.mp-forget');
@@ -55,6 +59,3 @@ forgotPasswordLink.addEventListener('click', function (event) {
   event.preventDefault();
   alert('Lien de réinitialisation du mot de passe envoyé par e-mail.');
 });
-
-//-----------------------------------------------------------------------------------
-

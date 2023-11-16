@@ -189,7 +189,22 @@ footer nav ul {
 	justify-content: flex-end;
 	margin: 2em
 }
-/* --------------------- */
+
+
+
+
+
+
+/* -------------------------------------------------------------------------------------------------------------------- */
+
+
+
+
+
+
+
+/* filtre */
+
 .tous {
 	margin: 5px;
 	padding: 5px;
@@ -203,6 +218,14 @@ footer nav ul {
 	align-items: center; 
 }
 /* --------------------- */
+
+
+
+
+
+
+
+
 .modifier {
 	padding-left: 20px;
 	font-family: Work Sans;
@@ -215,6 +238,14 @@ footer nav ul {
 
 }
 /* -------------------------------- */
+
+
+
+
+
+
+
+
 
 .category-list {
 	background-color: #fff;
@@ -243,6 +274,7 @@ footer nav ul {
   }
 
 /* ------------------------------------------ */
+
 #login {
     width: 50%;
     margin: auto;
@@ -315,10 +347,18 @@ footer nav ul {
     line-height: normal;
     text-decoration-line: underline;
 }
-/* ... Vos autres styles ... */
 
 
-.modal {
+
+
+
+/* ----------------------------------------------------------------------------------------------------------------------------------------- */
+
+
+
+
+.modal2 {
+    margin-top: 60px;
     display: none;
     position: fixed;
     top: 0;
@@ -331,7 +371,21 @@ footer nav ul {
     z-index: 999; /* Mettez une valeur élevée pour assurer que la modal est au premier plan */
 }
 
- /* Styles for the modal content */
+
+
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 999; /* Mettez une valeur élevée pour assurer que la modal est au premier plan */
+}
+
+
 .modal-content {
 	top: 30%;
     width: 688px;
@@ -342,10 +396,10 @@ footer nav ul {
     max-width: 400px;
     margin: 0 auto;
     text-align: center;
-    position: relative; /* Ajout de cette ligne pour positionner l'élément close de manière absolue*/ 
+    position: relative;
 } 
 
-/* Styles for the close button */
+
  .close {
     position: absolute;
     top: 10px;
@@ -393,7 +447,19 @@ div#worksContainer {
 
 
 
+
+
+
+
+
+
 /* --------------------------------------------------------------------------------- */
+
+
+
+
+
+
 #addPhotoModal {
     display: none;
 }
@@ -409,10 +475,12 @@ div#worksContainer {
 }
 
 .backButton i {
-	Width:21px;
-	Height:18.01px;
-    margin-right: 5px; /* Ajoutez un espace entre l'icône et le texte si nécessaire */
+    Width: 21px;
+    Height: 18.01px;
+    position: absolute;
+    left: 20px;
 }
+
 .validateButton {
 	width: 237px;
 	height: 36px;
@@ -429,9 +497,7 @@ div#worksContainer {
 	left: 50%;
 	transform: translateX(-50%);
 }
-button.validateButton {
-    border-radius: 60px;
-}
+
 .custom-file-upload {
     display: inline-block;
     padding: 10px;
@@ -457,11 +523,138 @@ button.validateButton {
     box-sizing: border-box;
     display: flex;
 }
+
+
+
+
+
+label {
+    display: flex;
+	font-family: Work Sans;
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 16px;
+	letter-spacing: 0em;
+	text-align: left;
+	width: 65px;
+	height: 16px;
+	right: 168px;
+    position: relative;
+	margin-bottom: 10px;
+}
+.séparation {
+    width: 400px;
+    border: 1px solid #B3B3B3;
+    position: relative;
+    top: 80px;
+}
+.séparation1 {
+	margin-top: 100px;
+	width: 400px ;
+	border: 1px solid #B3B3B3;
+}
+
+
+.work-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Cela assure que l'icône est centrée verticalement par rapport à l'image */
+}
+
+/* Ajoutez ce style pour la classe imagePreview */
+.imagePreview img {
+    max-width: 100%;
+    max-height: 300px; /* Vous pouvez ajuster la hauteur selon vos besoins */
+    display: block;
+    margin: auto;
+}
+/* ----------------------------------------------------------------------------- */
+/* Style pour la modal */
+#myModal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9);
+    padding-top: 60px;
+}
+
+/* Style pour le contenu de la modal 2*/
+.modal-content {
+    margin: auto;
+    background-color: white;
+    width: 680px;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Style pour le bouton de fermeture */
+.close {
+    color: #ccc;
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    font-size: 35px;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Style pour le titre de la modal */
+.modal-title {
+    color: white; /* Ajoutez d'autres styles si nécessaire */
+}
+
+.file-label:hover {
+    background-color: #2980b9;
+}
+
+.modal-content h2 {
+    display: flex;
+    justify-content: center;
+}
+
+.file-label {
+    color: white;
+    padding: 10px;
+    background-color: #CBD6DC;
+    color: #306685;
+    cursor: pointer;
+    width: 180px;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    height: 30px;
+    position: relative; /* Correction de la propriété "absolue" à "absolute" */
+}
+
 .imageDisplay {
-	margin-top: 30px;
-	background: #E8F1F6;
-	width: 400px;
-	height: 170px;
+    display: flex;
+    align-items: center;
+    background: #E8F1F6;
+    flex-direction: column;
+    width: 420px;
+    height: 169px;
+    border-radius: 3px;
+    margin-bottom: 20px;
+}
+
+.imageDisplay i {
+    margin-top: 10px;
+    font-size: 76px;
+    color: #B9C5CC;
 }
 
 /* Styles pour l'icône de l'image */
@@ -483,54 +676,91 @@ button.validateButton {
 
 }
 
-/* Styles pour la légende du titre */
-.imageDisplay p {
-    font-size: 16px; /* Taille de la police pour le titre */
-    color: #333; /* Couleur du texte pour le titre */
-    margin: 0; /* Supprimez les marges par défaut du paragraphe */
-}
+
 .imageDisplay p {
 	margin-top: 20px;
 	font-family: Work Sans;
-	font-size: 10px;
 	font-weight: 400;
 	line-height: 12px;
 	letter-spacing: 0em;
 	text-align: center;
-
+    font-size: 16px; /* Taille de la police pour le titre */
+    color: #333; /* Couleur du texte pour le titre */
+    margin: 0; /* Supprimez les marges par défaut du paragraphe */
 }
-/* Ajoutez des styles supplémentaires selon vos besoins */
+
+#imagePreview {
+    z-index: 999;
+    width: 129px;
+    height: 193px;
+    position: relative;
+    bottom: 90px;
+}
+
+/* Ajoutez cette classe pour masquer les éléments au départ */
+.hide {
+    display: none;
+}
+
+p.description {
+    position: absolute;
+    top: -25px;
+}
 input#titleInput {
     width: 400px;
-    height: 51px;
+    height: 50px;
+  margin-bottom: 40px;
 }
 select#categorySelect {
-	width: 400px;
-    height: 51px;
+    width: 400px;
+    height: 50px;
 }
-label {
+
+label.file-label {
+    position: relative;
+    left: 0px;
+}
+button.validateButton {
+    background-color: #A7A7A7;
+    width: 237px;
+    height: 36px;
+    margin-top: 50px;
+    color: white;
+}
+/* Ajoutez du style pour le conteneur du bouton de retour et du titre */
+.modal-header {
     display: flex;
-	font-family: Work Sans;
-	font-size: 14px;
-	font-weight: 600;
-	line-height: 16px;
-	letter-spacing: 0em;
-	text-align: left;
-	width: 65px;
-	height: 16px;
-
-
-
-}
-.séparation {
-	margin-top: 190px;
-	width: 400px ;
-	border: 1px solid #B3B3B3;
-}
-.séparation1 {
-	margin-top: 100px;
-	width: 400px ;
-	border: 1px solid #B3B3B3;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px; /* Ajustez la marge selon vos besoins */
 }
 
+/* Style pour le bouton de retour */
+.backButton {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #333; /* Couleur du texte du bouton */
+}
 
+/* Style pour le titre de la modal */
+.modal-content h2 {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    font-family: Work Sans;
+    font-size: 26px;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: 0em;
+    text-align: center;
+}
+
+
+img.custom-image-style {
+    position: absolute;
+    top: 75px;
+    height: 169px;
+    right: 0px;
+}
