@@ -76,18 +76,6 @@ function displayWorks(works) {
 //-----------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------
-// Ajoutez cette ligne dans la fonction closeAddPhotoModal pour rafraîchir les œuvres après la suppression
-// function closeAddPhotoModal() {
-//   const addPhotoModal = document.getElementById("addPhotoModal");
-//   addPhotoModal.style.display = "none";
-//   // Ensuite, ouvrir la modal principale
-//   openModal();
-//   // Rafraîchir les œuvres après la suppression
-//   getWorksFromAPI();
-// }
-//-----------------------------------------------------------------------------------------
-//-----------------------------------------------------------------------------------------
-//-----------------------------------------------------------------------------------------
 // Fonction pour récupérer les œuvres depuis l'API
 async function getWorksFromAPI() {
   try {
@@ -121,6 +109,8 @@ document.addEventListener("DOMContentLoaded", function () {
     modifierSpan.addEventListener("click", openModalAndDisplayWorks);
   }
 });
+
+
 // -------------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------
@@ -132,6 +122,19 @@ function openModal() {
   // Afficher les éléments
   showElements();
 }
+
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  // Sélectionnez l'élément input
+  const imageInput = document.getElementById("imageInput");
+
+  // Ajoutez un gestionnaire d'événements pour l'événement "change"
+  imageInput.addEventListener("change", function() {
+    displayImage();
+  });
+});
 
 // Fonction pour afficher l'image sélectionnée
 function displayImage() {
@@ -158,6 +161,8 @@ function displayImage() {
     reader.readAsDataURL(file);
   }
 }
+
+
 // Fonction pour afficher les éléments
 function showElements() {
   document.querySelector(".file-label").classList.remove("hide");
@@ -170,15 +175,37 @@ function hideElements() {
   document.querySelector(".description").classList.add("hide");
   document.querySelector(".custom-icon").classList.add("hidélémentse");
 }
+
+// OUVERTURE SECONDE MODAL 
+
+document.addEventListener("DOMContentLoaded", function () {
+  const addPhotoBtn = document.getElementById("addPhotoBtn");
+
+  // Ajoutez un gestionnaire d'événements pour le clic sur le bouton "Ajouter une photo"
+  addPhotoBtn.addEventListener("click", function () {
+    // Fermez la première modal avant d'ouvrir la deuxième
+    closeModal();
+    openAddPhotoModal();
+  });
+});
+
+
 function openAddPhotoModal() {
   const addPhotoModal = document.getElementById("addPhotoModal");
   addPhotoModal.style.display = "block";
   // Afficher les éléments
   showElements();
 }
+document.addEventListener("DOMContentLoaded", function () {
+  const backButton = document.querySelector("#addPhotoModal .backButton");
+
+  // Ajoutez un gestionnaire d'événements pour le clic sur le bouton de retour
+  backButton.addEventListener("click", goBack);
+});
+
 // Fonction pour retourner à la modal principale
 function goBack() {
-  var addPhotoModal = document.getElementById("addPhotoModal");
+  const addPhotoModal = document.getElementById("addPhotoModal");
   addPhotoModal.style.display = "none";
   // Réinitialiser le champ d'entrée pour permettre une nouvelle sélection
   document.getElementById("imageInput").value = "";
@@ -189,15 +216,37 @@ function goBack() {
   // Afficher la modal principale
   openModal();
 }
-function closeAddPhotoModal() {
+document.addEventListener("DOMContentLoaded", function () {
+  const closeButton = document.querySelector("#addPhotoModal .close");
+
+  // Ajoutez un gestionnaire d'événements pour le clic sur le bouton de fermeture
+  closeButton.addEventListener("click", closeModals);
+});
+
+// Fonction pour fermer les deux modales
+function closeModals() {
+  const modal = document.getElementById("myModal");
   const addPhotoModal = document.getElementById("addPhotoModal");
+
+  // Masquer les deux modales
+  modal.style.display = "none";
   addPhotoModal.style.display = "none";
-  // Ensuite, ouvrir la modal principale
-  openModal();
 }
+
 // ------------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------
+document.addEventListener("DOMContentLoaded", function () {
+  // Sélectionnez le bouton de validation
+  const validateButton = document.querySelector(".validateButton");
+
+  // Ajoutez un gestionnaire d'événements pour le clic sur le bouton de validation
+  validateButton.addEventListener("click", async function() {
+    await validatePhoto();
+  });
+});
+
+// Fonction pour valider la photo (votre code existant)
 async function validatePhoto() {
   const title = document.getElementById("titleInput").value;
   const category = document.getElementById("categorySelect").value;
@@ -234,6 +283,7 @@ async function validatePhoto() {
     console.error("Erreur lors de la requête POST:", error.message);
   }
 }
+
 //-----------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------

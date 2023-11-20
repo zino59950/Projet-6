@@ -76,7 +76,7 @@
         <!-- Utilisez une classe spéciale pour le conteneur du bouton de retour et du titre -->
         <div class="modal-header">
             <!-- Bouton de retour -->
-            <button class="backButton" onclick="goBack()"><i class="fas fa-arrow-left"></i></button>
+            <button class="backButton"><i class="fas fa-arrow-left"></i></button>
             <!-- Titre de la modal -->
             <h2>Ajout photo</h2>
         </div>
@@ -85,7 +85,7 @@
             <i class="fa-regular fa-image custom-icon hide"></i><br>
             <div id="imagePreview" class="hide"></div>
             <label for="imageInput" class="file-label hide">+ Ajouter une photo</label></br>
-            <input type="file" accept="image/*" id="imageInput" onchange="displayImage()" class="file-input hide" style="display: none;"></br>
+            <input type="file" accept="image/*" id="imageInput" class="file-input hide" style="display: none;"></br>
             <p class="description hide">jpg, png : 4mo max</p>
         </div>
         <label for="titleInput">Titre:</label>
@@ -98,7 +98,7 @@
             <option value="3">Hôtels & restaurants</option>
         </select><br>
         <div class="séparation"></div>
-        <button class="validateButton" onclick="validatePhoto()">Valider</button>
+        <button class="validateButton">Valider</button>
     </div>
 </div>
 

@@ -760,7 +760,7 @@ button.validateButton {
 
 img.custom-image-style {
     position: absolute;
-    top: 75px;
+    top: -6px;
     height: 169px;
     right: 0px;
 }
