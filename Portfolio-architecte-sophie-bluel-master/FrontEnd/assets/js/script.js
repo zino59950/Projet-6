@@ -39,11 +39,9 @@ function chargerProjets() {
             console.error("Une erreur s'est produite lors de la récupération des données :", error);
         });
 }
-
-
 // --------------------------------------------------------------------------------------------------------
-
-
+// --------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------
 // Sélectionnez le bouton "Tous" et changez son style pour simuler un clic
 tous.style.backgroundColor = "#1D6154";
 tous.style.color = "white";
@@ -87,11 +85,9 @@ tous.addEventListener("click", toggleTousButton);
 
 // Sélectionnez tous les éléments HTML avec la classe "category-item" et stockez-les dans la variable "categoryButtons"
 const categoryButtons = document.querySelectorAll(".category-item");
-
-
 // ---------------------------------------------------------------------------------------------------------------
-
-
+// --------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------
 // Définition de la fonction "filterAndDisplayProjects" pour filtrer et afficher des projets en fonction de la catégorie
 function filterAndDisplayProjects(categoryId) {
     fetch("http://localhost:5678/api/works")
@@ -119,11 +115,9 @@ function filterAndDisplayProjects(categoryId) {
             console.error("Une erreur s'est produite lors de la récupération des données :", error);
         });
 }
-
-
+// --------------------------------------------------------------------------------------------------------
 // --------------------------------------------------------------------------------------------------------------
-
-
+// --------------------------------------------------------------------------------------------------------
 // Ajoutez des écouteurs d'événement aux boutons de catégorie pour filtrer et afficher les projets
 categoryButtons.forEach(button => {
     button.addEventListener("click", function () {
@@ -134,9 +128,9 @@ categoryButtons.forEach(button => {
         tous.style.color = "#1D6154";
     });
 });
-
-
-
+// --------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------
 // Ajoutez des écouteurs d'événement aux boutons de catégorie pour gérer le style lors du clic
 categoryButtons.forEach(button => {
     button.addEventListener("click", function () {
@@ -157,8 +151,9 @@ categoryButtons.forEach(button => {
         this.style.color = "white";
     });
 });
-
-
+// --------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------
 const modifier = document.querySelector(".modifier")
 const categorylist = document.querySelector(".category-list")
 if (localStorage.token) {
@@ -169,5 +164,5 @@ if (localStorage.token) {
 }
 
 
-
+export {chargerProjets}
 

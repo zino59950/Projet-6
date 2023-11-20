@@ -60,10 +60,10 @@
 
     <div class="modal-content projet-modal-content">
         <h3>Galerie photos</h3>
-        <span class="close" onclick="closeModal()">&times;</span>
+        <span class="close">&times;</span>
 		<div id="worksContainer"></div>
 		<div class="séparation1"></div>
-        <button id="addPhotoBtn" onclick="openAddPhotoModal()">Ajouter une photo</button>
+        <button id="addPhotoBtn">Ajouter une photo</button>
     </div>
 </div> 
 <!-- ---------------------------------------------------------------------------------------------------- -->
@@ -72,7 +72,7 @@
 <div id="addPhotoModal" class="modal2">
     <div class="modal-content">
         <!-- Mettez à jour le gestionnaire d'événements pour la croix -->
-        <span class="close" onclick="closeAddPhotoModal()">&times;</span>
+        <span class="close">&times;</span>
         <!-- Utilisez une classe spéciale pour le conteneur du bouton de retour et du titre -->
         <div class="modal-header">
             <!-- Bouton de retour -->
@@ -148,11 +148,11 @@
 	</nav>
 </footer>
 
-<script src="assets/js/script.js" defer></script>
+<script src="assets/js/script.js" defer type="module"></script>
 
-<script src="assets/js/function.js" defer></script>
+<script src="assets/js/function.js" defer type="module"></script>
 
-<script src="assets/js/edit.js"></script>
+<script src="assets/js/edit.js" type="module"></script>
 
 </body>
 
