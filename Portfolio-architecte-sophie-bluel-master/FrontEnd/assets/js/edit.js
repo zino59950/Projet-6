@@ -110,7 +110,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-
 // -------------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------
@@ -123,17 +122,39 @@ function openModal() {
   showElements();
 }
 
+// Vérifier si les champs sont remplis
+const checkInputs = () => {
+  // Récupérer les valeurs des champs
+  const title = document.getElementById("titleInput").value.trim();
+  const category = document.getElementById("categorySelect").value.trim();
+  const imageInput = document.getElementById("imageInput").value.trim();
+  // Vérifier si les valeurs sont vides
+  if (title === "" || category === "" || imageInput.length === 0) {
+    document.querySelector(".validateButton").classList.remove("active");
+    return false;
+  } else {
+    document.querySelector(".validateButton").classList.add("active");
+    return true;
+  }
+};
 
+// Sélectionnez l'élément input
+const imageInput = document.getElementById("imageInput");
 
+// Ajoutez un gestionnaire d'événements pour l'événement "change"
+imageInput.addEventListener("change", function () {
+  displayImage();
+  checkInputs();
+});
 
-document.addEventListener("DOMContentLoaded", function () {
-  // Sélectionnez l'élément input
-  const imageInput = document.getElementById("imageInput");
+const categorySelect = document.getElementById("categorySelect");
+categorySelect.addEventListener("change", function () {
+  checkInputs();
+});
 
-  // Ajoutez un gestionnaire d'événements pour l'événement "change"
-  imageInput.addEventListener("change", function() {
-    displayImage();
-  });
+const titleInput = document.getElementById("titleInput");
+titleInput.addEventListener("change", function () {
+  checkInputs();
 });
 
 // Fonction pour afficher l'image sélectionnée
@@ -162,7 +183,6 @@ function displayImage() {
   }
 }
 
-
 // Fonction pour afficher les éléments
 function showElements() {
   document.querySelector(".file-label").classList.remove("hide");
@@ -176,19 +196,16 @@ function hideElements() {
   document.querySelector(".custom-icon").classList.add("hidélémentse");
 }
 
-// OUVERTURE SECONDE MODAL 
+// OUVERTURE SECONDE MODAL
 
-document.addEventListener("DOMContentLoaded", function () {
-  const addPhotoBtn = document.getElementById("addPhotoBtn");
+const addPhotoBtn = document.getElementById("addPhotoBtn");
 
-  // Ajoutez un gestionnaire d'événements pour le clic sur le bouton "Ajouter une photo"
-  addPhotoBtn.addEventListener("click", function () {
-    // Fermez la première modal avant d'ouvrir la deuxième
-    closeModal();
-    openAddPhotoModal();
-  });
+// Ajoutez un gestionnaire d'événements pour le clic sur le bouton "Ajouter une photo"
+addPhotoBtn.addEventListener("click", function () {
+  // Fermez la première modal avant d'ouvrir la deuxième
+  closeModal();
+  openAddPhotoModal();
 });
-
 
 function openAddPhotoModal() {
   const addPhotoModal = document.getElementById("addPhotoModal");
@@ -196,12 +213,10 @@ function openAddPhotoModal() {
   // Afficher les éléments
   showElements();
 }
-document.addEventListener("DOMContentLoaded", function () {
-  const backButton = document.querySelector("#addPhotoModal .backButton");
+const backButton = document.querySelector("#addPhotoModal .backButton");
 
-  // Ajoutez un gestionnaire d'événements pour le clic sur le bouton de retour
-  backButton.addEventListener("click", goBack);
-});
+// Ajoutez un gestionnaire d'événements pour le clic sur le bouton de retour
+backButton.addEventListener("click", goBack);
 
 // Fonction pour retourner à la modal principale
 function goBack() {
@@ -216,12 +231,10 @@ function goBack() {
   // Afficher la modal principale
   openModal();
 }
-document.addEventListener("DOMContentLoaded", function () {
-  const closeButton = document.querySelector("#addPhotoModal .close");
+const closeButton = document.querySelector("#addPhotoModal .close");
 
-  // Ajoutez un gestionnaire d'événements pour le clic sur le bouton de fermeture
-  closeButton.addEventListener("click", closeModals);
-});
+// Ajoutez un gestionnaire d'événements pour le clic sur le bouton de fermeture
+closeButton.addEventListener("click", closeModals);
 
 // Fonction pour fermer les deux modales
 function closeModals() {
@@ -236,14 +249,12 @@ function closeModals() {
 // ------------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------
-document.addEventListener("DOMContentLoaded", function () {
-  // Sélectionnez le bouton de validation
-  const validateButton = document.querySelector(".validateButton");
+// Sélectionnez le bouton de validation
+const validateButton = document.querySelector(".validateButton");
 
-  // Ajoutez un gestionnaire d'événements pour le clic sur le bouton de validation
-  validateButton.addEventListener("click", async function() {
-    await validatePhoto();
-  });
+// Ajoutez un gestionnaire d'événements pour le clic sur le bouton de validation
+validateButton.addEventListener("click", async function () {
+  await validatePhoto();
 });
 
 // Fonction pour valider la photo (votre code existant)
@@ -275,10 +286,13 @@ async function validatePhoto() {
       );
     }
     const data = await response.json();
-    // Assuming addNewPhotoToGallery and closeAddPhotoModal are defined elsewhere
-    addNewPhotoToGallery(data);
-    // Close the modal after successful upload
-    closeAddPhotoModal();
+    // Ajoutez la nouvelle photo à la liste des projets
+    works.push(data);
+
+    displayWorks(works);
+    chargerProjets();
+    document.getElementById("titleInput").value = "";
+    closeModals();
   } catch (error) {
     console.error("Erreur lors de la requête POST:", error.message);
   }

@@ -139,7 +139,7 @@ li:hover {
 
 .gallery img {
 	width: 100%;
-
+    height: 100%;
 }
 #contact {
 	width: 50%;
@@ -189,22 +189,8 @@ footer nav ul {
 	justify-content: flex-end;
 	margin: 2em
 }
-
-
-
-
-
-
 /* -------------------------------------------------------------------------------------------------------------------- */
-
-
-
-
-
-
-
 /* filtre */
-
 .tous {
 	margin: 5px;
 	padding: 5px;
@@ -218,14 +204,6 @@ footer nav ul {
 	align-items: center; 
 }
 /* --------------------- */
-
-
-
-
-
-
-
-
 .modifier {
 	padding-left: 20px;
 	font-family: Work Sans;
@@ -238,15 +216,6 @@ footer nav ul {
 
 }
 /* -------------------------------- */
-
-
-
-
-
-
-
-
-
 .category-list {
 	background-color: #fff;
 	padding: 10px;
@@ -258,7 +227,6 @@ footer nav ul {
 	height: 37px;
 	opacity: 1;
   }
-  
   .category-item {
 	margin: 5px;
 	padding: 5px;
@@ -270,17 +238,14 @@ footer nav ul {
 	cursor: pointer;
 	display: flex;
 	align-items: center; 
-  
   }
 
 /* ------------------------------------------ */
-
 #login {
     width: 50%;
     margin: auto;
     padding-top: 150px; /* 9.38rem converti en pixels */
   }
-
   .login_title {
     display: flex;
     justify-content: center;
@@ -293,26 +258,22 @@ footer nav ul {
     font-weight: 700;
     line-height: normal;
   }
-
   #login form {
     text-align: left;
     margin-top: 37px;
     display: flex;
     flex-direction: column;
   }
-
   #login input {
     height: 50px;
     font-size: 14px;
     border: none;
     box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
-
   }
 
   #login p {
     color: red;
   }
-
   input[type="submit"] {
     margin: 48px auto;
     border-radius: 60px;
@@ -323,9 +284,7 @@ footer nav ul {
     color: #FFF;
     text-align: center;
     font-family: Syne;
-
   }
-
   #login label {
     margin: 32px 0 16px 0;
     color: #3D3D3D;
@@ -335,7 +294,6 @@ footer nav ul {
     font-weight: 500;
     line-height: normal;
   }
-
   .mp-forget {
     display: block;
     margin: auto;
@@ -347,21 +305,12 @@ footer nav ul {
     line-height: normal;
     text-decoration-line: underline;
 }
-
-
-
-
-
 /* ----------------------------------------------------------------------------------------------------------------------------------------- */
-
-
-
-
 .modal2 {
     margin-top: 60px;
     display: none;
     position: fixed;
-    top: 0;
+    top: -60px;
     left: 0;
     width: 100%;
     height: 100%;
@@ -370,10 +319,6 @@ footer nav ul {
     align-items: center;
     z-index: 999; /* Mettez une valeur élevée pour assurer que la modal est au premier plan */
 }
-
-
-
-
 .modal {
     display: none;
     position: fixed;
@@ -384,22 +329,6 @@ footer nav ul {
     align-items: center;
     z-index: 999; /* Mettez une valeur élevée pour assurer que la modal est au premier plan */
 }
-
-
-.modal-content {
-	top: 30%;
-    width: 688px;
-    height: 630px;
-    background: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    max-width: 400px;
-    margin: 0 auto;
-    text-align: center;
-    position: relative;
-} 
-
-
  .close {
     position: absolute;
     top: 10px;
@@ -430,36 +359,18 @@ div#worksContainer {
     margin-top: 20px;
 }
 /* Ajoutez ceci à votre feuille de style CSS existante ou créez-en une nouvelle */
-
 .work-item {
     position: relative;
     margin: 5px;
     display: flex;
     justify-content: flex-end;
 }
-
 .delete-icon {
     font-size: 17px;
     color: #000; /* Couleur de l'icône */
     cursor: pointer;
 }
-
-
-
-
-
-
-
-
-
-
 /* --------------------------------------------------------------------------------- */
-
-
-
-
-
-
 #addPhotoModal {
     display: none;
 }
@@ -473,20 +384,17 @@ div#worksContainer {
     display: flex;
     align-items: center;
 }
-
 .backButton i {
     Width: 21px;
     Height: 18.01px;
     position: absolute;
     left: 20px;
 }
-
 .validateButton {
 	width: 237px;
 	height: 36px;
 	border-radius: 60px;
 	background-color:  #A7A7A7;
-	;
 	color: white;
 	padding: 10px;
 	border: none;
@@ -498,12 +406,27 @@ div#worksContainer {
 	transform: translateX(-50%);
 }
 
+.validateButton.active {
+    background-color: #1D6154;
+}
+
+.btn-logout {
+    display: none;
+}
+
+.mode-edit {
+    display: none;
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
+
 .custom-file-upload {
     display: inline-block;
     padding: 10px;
     cursor: pointer;
     background-color:  #CBD6DC;
-	;
     color: white;
     border: none;
     border-radius: 5px;
@@ -513,9 +436,7 @@ div#worksContainer {
 #imageInput {
     display: none;
 }
-
 /* Style du champ de texte pour le titre */
-
 #titleInput {
     width: 100%;
     padding: 8px;
@@ -523,11 +444,6 @@ div#worksContainer {
     box-sizing: border-box;
     display: flex;
 }
-
-
-
-
-
 label {
     display: flex;
 	font-family: Work Sans;
@@ -553,8 +469,6 @@ label {
 	width: 400px ;
 	border: 1px solid #B3B3B3;
 }
-
-
 .work-container {
     display: flex;
     justify-content: space-between;
@@ -582,18 +496,32 @@ label {
     background-color: rgba(0, 0, 0, 0.9);
     padding-top: 60px;
 }
-
 /* Style pour le contenu de la modal 2*/
 .modal-content {
     margin: auto;
     background-color: white;
-    width: 680px;
+    max-width: 525px;
     height: 600px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    top: 30%;
+    padding: 20px;
+    border-radius: 5px;
+    position: relative;
 }
-
+/* Style pour le titre de la modal */
+.modal-content h2 {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    font-family: Work Sans;
+    font-size: 26px;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: 0em;
+    text-align: center;
+}
 /* Style pour le bouton de fermeture */
 .close {
     color: #ccc;
@@ -604,28 +532,19 @@ label {
     font-weight: bold;
     transition: color 0.3s;
 }
-
 .close:hover,
 .close:focus {
     color: #fff;
     text-decoration: none;
     cursor: pointer;
 }
-
 /* Style pour le titre de la modal */
 .modal-title {
     color: white; /* Ajoutez d'autres styles si nécessaire */
 }
-
 .file-label:hover {
     background-color: #2980b9;
 }
-
-.modal-content h2 {
-    display: flex;
-    justify-content: center;
-}
-
 .file-label {
     color: white;
     padding: 10px;
@@ -637,9 +556,8 @@ label {
     display: flex;
     justify-content: center;
     height: 30px;
-    position: relative; /* Correction de la propriété "absolue" à "absolute" */
+    position: relative; 
 }
-
 .imageDisplay {
     display: flex;
     align-items: center;
@@ -650,23 +568,17 @@ label {
     border-radius: 3px;
     margin-bottom: 20px;
 }
-
 .imageDisplay i {
     margin-top: 10px;
     font-size: 76px;
     color: #B9C5CC;
 }
-
 /* Styles pour l'icône de l'image */
 .imageDisplay .custom-icon {
-
 	margin-top: 10px;
     font-size: 76px; /* Taille de la police pour l'icône */
-     color: #B9C5CC;
-	 ;
-
+    color: #B9C5CC;
 }
-
 /* Styles pour le bouton de téléchargement de fichier */
 .imageDisplay .custom-file-upload {
     cursor: pointer;
@@ -675,8 +587,6 @@ label {
 	color:#306685;
 
 }
-
-
 .imageDisplay p {
 	margin-top: 20px;
 	font-family: Work Sans;
@@ -688,7 +598,6 @@ label {
     color: #333; /* Couleur du texte pour le titre */
     margin: 0; /* Supprimez les marges par défaut du paragraphe */
 }
-
 #imagePreview {
     z-index: 999;
     width: 129px;
@@ -696,15 +605,13 @@ label {
     position: relative;
     bottom: 90px;
 }
-
 /* Ajoutez cette classe pour masquer les éléments au départ */
 .hide {
     display: none;
 }
-
 p.description {
     position: absolute;
-    top: -25px;
+    top: 205px;
 }
 input#titleInput {
     width: 400px;
@@ -715,7 +622,6 @@ select#categorySelect {
     width: 400px;
     height: 50px;
 }
-
 label.file-label {
     position: relative;
     left: 0px;
@@ -734,7 +640,6 @@ button.validateButton {
     align-items: center;
     margin-bottom: 10px; /* Ajustez la marge selon vos besoins */
 }
-
 /* Style pour le bouton de retour */
 .backButton {
     background: none;
@@ -743,24 +648,9 @@ button.validateButton {
     cursor: pointer;
     color: #333; /* Couleur du texte du bouton */
 }
-
-/* Style pour le titre de la modal */
-.modal-content h2 {
-    display: flex;
-    justify-content: center;
-    margin: 0;
-    font-family: Work Sans;
-    font-size: 26px;
-    font-weight: 400;
-    line-height: 30px;
-    letter-spacing: 0em;
-    text-align: center;
-}
-
-
 img.custom-image-style {
     position: absolute;
-    top: -6px;
+    top: 3px;
     height: 169px;
     right: 0px;
 }
