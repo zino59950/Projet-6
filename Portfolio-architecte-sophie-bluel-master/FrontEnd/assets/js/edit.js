@@ -58,8 +58,8 @@ function displayWorks(works) {
     workElement.innerHTML = `
             <div style="display: flex; justify-content: flex-end;">
                 <img src="${work.imageUrl}" alt="${work.title}" style="width: 78.12px; height: 104.08px;">
-                <div class="delete-icon" style="margin-left: -15px;z-index:999">
-                    <i class="fas fa-trash"></i>
+                <div class="delete-icon" style="margin-left: -20px;z-index:999";>
+                  <i class="fa-regular fa-trash-can"></i>
                 </div>
             </div>
             <!-- Ajoutez d'autres détails de l'œuvre ici -->
@@ -257,7 +257,7 @@ validateButton.addEventListener("click", async function () {
   await validatePhoto();
 });
 
-// Fonction pour valider la photo (votre code existant)
+// Fonction pour valider la photo 
 async function validatePhoto() {
   const title = document.getElementById("titleInput").value;
   const category = document.getElementById("categorySelect").value;

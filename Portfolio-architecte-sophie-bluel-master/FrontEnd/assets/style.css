@@ -367,9 +367,15 @@ div#worksContainer {
 }
 .delete-icon {
     font-size: 17px;
-    color: #000; /* Couleur de l'icône */
+    color:white#000; /* Couleur de l'icône */
     cursor: pointer;
 }
+.delete-icon .fa-regular.fa-trash-can {
+    color: white;
+    background-color: black;
+    width: 15px;
+    margin-top: 5px;
+  }
 /* --------------------------------------------------------------------------------- */
 #addPhotoModal {
     display: none;
