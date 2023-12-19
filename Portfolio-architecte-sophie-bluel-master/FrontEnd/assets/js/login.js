@@ -2,26 +2,18 @@
 const form = document.querySelector('form');
 const emailInput = document.getElementById('email');
 const passwordInput = document.getElementById('pass');
-
-
 // Événement de soumission du formulaire
 form.addEventListener('submit', function (event) {
   event.preventDefault(); // Empêche la soumission du formulaire
-
-
   // Récupération des valeurs saisies par l'utilisateur
   const email = emailInput.value;
   const password = passwordInput.value;
-
-
   // Vous pouvez maintenant effectuer une validation côté client ici
   // Par exemple, vérifier si les champs ne sont pas vides
   if (!email || !password) {
     alert('Veuillez remplir tous les champs.');
     return;
   }
-
-
   // Envoi des données d'authentification à l'API
   fetch('http://localhost:5678/api/users/login', {
     method: 'POST',
@@ -51,8 +43,6 @@ form.addEventListener('submit', function (event) {
       alert('Une erreur est survenue lors de l\'authentification.');
     });
 });
-
-
 // Lien "Mot de passe oublié"
 const forgotPasswordLink = document.querySelector('.mp-forget');
 forgotPasswordLink.addEventListener('click', function (event) {

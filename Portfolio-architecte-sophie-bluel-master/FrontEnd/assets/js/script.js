@@ -36,31 +36,14 @@ function chargerProjets() {
       );
     });
 }
+
 // --------------------------------------------------------------------------------------------------------
-// --------------------------------------------------------------------------------------------------------
-// --------------------------------------------------------------------------------------------------------
+
 // Sélectionnez le bouton "Tous" et changez son style pour simuler un clic
 tous.style.backgroundColor = "#1D6154";
-
 tous.style.color = "white";
-
 chargerProjets(); // Chargez les projets
-
 isTousClicked = true; // Définissez "isTousClicked" à "true"
-
-// Ajoutez un écouteur d'événement pour changer le style au survol du bouton "Tous"
-tous.addEventListener("mouseover", function () {
-  this.style.backgroundColor = "#1D6154";
-  this.style.color = "white";
-});
-
-// Ajoutez un écouteur d'événement pour rétablir le style initial lorsque le survol du bouton "Tous" est terminé
-tous.addEventListener("mouseout", function () {
-  if (!isTousClicked) {
-    this.style.backgroundColor = "white";
-    this.style.color = "#1D6154";
-  }
-});
 
 // Définition de la fonction "toggleTousButton" qui gère le bouton "Tous"
 function toggleTousButton() {
@@ -92,14 +75,16 @@ function toggleTousButton() {
     });
   }
 }
-// Ajoutez un écouteur d'événement pour le bouton "Tous" qui appelle la fonction "toggleTousButton" lors du clic
+// écouteur d'événement pour le bouton "Tous" qui appelle la fonction "toggleTousButton" lors du clic
 tous.addEventListener("click", toggleTousButton);
-// Sélectionnez tous les éléments HTML avec la classe "category-item" et stockez-les dans la variable "categoryButtons"
+// Stous les éléments HTML avec la classe "category-item" et 
+// stockez-les dans la variable "categoryButtons"
 const categoryButtons = document.querySelectorAll(".category-item");
-// ---------------------------------------------------------------------------------------------------------------
+
 // --------------------------------------------------------------------------------------------------------
-// --------------------------------------------------------------------------------------------------------
-// Définition de la fonction "filterAndDisplayProjects" pour filtrer et afficher des projets en fonction de la catégorie
+
+// Définition de la fonction "filterAndDisplayProjects" pour filtrer et 
+// afficher des projets en fonction de la catégorie
 function filterAndDisplayProjects(categoryId) {
   fetch("http://localhost:5678/api/works")
     .then((response) => response.json())
@@ -129,9 +114,9 @@ function filterAndDisplayProjects(categoryId) {
       );
     });
 }
-// --------------------------------------------------------------------------------------------------------
+
 // --------------------------------------------------------------------------------------------------------------
-// --------------------------------------------------------------------------------------------------------
+
 // Ajoutez des écouteurs d'événement aux boutons de catégorie pour filtrer et afficher les projets
 categoryButtons.forEach((button) => {
   button.addEventListener("click", function () {
@@ -142,9 +127,9 @@ categoryButtons.forEach((button) => {
     tous.style.color = "#1D6154";
   });
 });
+
 // --------------------------------------------------------------------------------------------------------
-// --------------------------------------------------------------------------------------------------------
-// --------------------------------------------------------------------------------------------------------
+
 // Ajoutez des écouteurs d'événement aux boutons de catégorie pour gérer le style lors du clic
 categoryButtons.forEach((button) => {
   button.addEventListener("click", function () {
@@ -164,32 +149,15 @@ categoryButtons.forEach((button) => {
     this.style.backgroundColor = "#1D6154";
     this.style.color = "white";
   });
-
-  // Ajoutez un écouteur d'événement pour changer le style au survol du bouton
-  button.addEventListener("mouseover", function () {
-    this.style.backgroundColor = "#1D6154";
-    this.style.color = "white";
-  });
-
-  // Ajoutez un écouteur d'événement pour rétablir le style initial lorsque le survol est terminé
-  button.addEventListener("mouseout", function () {
-    if (
-      this.getAttribute("data-category") !==
-        tous.getAttribute("data-category") ||
-      !isTousClicked
-    ) {
-      this.style.backgroundColor = "white";
-      this.style.color = "#1D6154";
-    }
-  });
 });
+
 // --------------------------------------------------------------------------------------------------------
-// --------------------------------------------------------------------------------------------------------
-// --------------------------------------------------------------------------------------------------------
+
+//BOUTTON LOGOUT QUI REMPLACE LE BOUTON LOGIN--
 const modifier = document.querySelector(".modifier");
 const categorylist = document.querySelector(".category-list");
-
-// si on est connecté on affiche le bouton modifier et logout et on cache le bouton login et les filtres
+// si on est connecté on affiche le bouton modifier et logout et on cache le bouton login et 
+// les filtres
 if (localStorage.token) {
   document.getElementById("categoryList").style.display = "none";
   document.querySelector(".btn-login").style.display = "none";

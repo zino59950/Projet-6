@@ -6,14 +6,14 @@ const btnCloseModalDelete = document.querySelector("#myModal .close");
 btnCloseModalDelete.addEventListener("click", () => {
   document.getElementById("myModal").style.display = "none";
 });
-//  Déclarez la fonction closeModal dans le contexte global
+//  Déclarez la fonction closeModal qui ferme la modal principal
 function closeModal() {
   const modal = document.getElementById("myModal");
   modal.style.display = "none";
   // Réinitialiser le champ d'entrée pour permettre une nouvelle sélection
   document.getElementById("imageInput").value = "";
   // Masquer les éléments
-  hideElements();
+  hideInputImage();
   // Masquer l'élément imagePreview
   document.getElementById("imagePreview").classList.add("hide");
 }
@@ -119,7 +119,7 @@ function openModal() {
   const modal = document.getElementById("myModal");
   modal.style.display = "block";
   // Afficher les éléments
-  showElements();
+  showInputImage();
 }
 
 // Vérifier si les champs sont remplis
@@ -175,7 +175,7 @@ function displayImage() {
       img.classList.add("custom-image-style");
       preview.appendChild(img);
       // Masquer les éléments lorsque l'image est affichée
-      hideElements();
+      hideInputImage();
       // Afficher l'élément imagePreview
       preview.classList.remove("hide");
     };
@@ -183,17 +183,17 @@ function displayImage() {
   }
 }
 
-// Fonction pour afficher les éléments
-function showElements() {
+// Fonction pour afficher l'input pour upload une image
+function showInputImage() {
   document.querySelector(".file-label").classList.remove("hide");
   document.querySelector(".description").classList.remove("hide");
   document.querySelector(".custom-icon").classList.remove("hide");
 }
-// Fonction pour masquer les éléments
-function hideElements() {
+// Fonction pour masquer l'input quand on a upload une image
+function hideInputImage() {
   document.querySelector(".file-label").classList.add("hide");
   document.querySelector(".description").classList.add("hide");
-  document.querySelector(".custom-icon").classList.add("hidélémentse");
+  document.querySelector(".custom-icon").classList.add("hide");
 }
 
 // OUVERTURE SECONDE MODAL
@@ -211,7 +211,7 @@ function openAddPhotoModal() {
   const addPhotoModal = document.getElementById("addPhotoModal");
   addPhotoModal.style.display = "block";
   // Afficher les éléments
-  showElements();
+  showInputImage();
 }
 const backButton = document.querySelector("#addPhotoModal .backButton");
 
@@ -225,19 +225,20 @@ function goBack() {
   // Réinitialiser le champ d'entrée pour permettre une nouvelle sélection
   document.getElementById("imageInput").value = "";
   // Masquer les éléments
-  hideElements();
+  hideInputImage();
   // Masquer l'élément imagePreview
   document.getElementById("imagePreview").classList.add("hide");
   // Afficher la modal principale
   openModal();
 }
+// selection du boutton modal sur la modal 2
 const closeButton = document.querySelector("#addPhotoModal .close");
 
 // Ajoutez un gestionnaire d'événements pour le clic sur le bouton de fermeture
-closeButton.addEventListener("click", closeModals);
+closeButton.addEventListener("click", closeAddPhotoModal);
 
-// Fonction pour fermer les deux modales
-function closeModals() {
+// Fonction pour fermer les deux modales la modal add et la principal
+function closeAddPhotoModal() {
   const modal = document.getElementById("myModal");
   const addPhotoModal = document.getElementById("addPhotoModal");
 
@@ -257,11 +258,13 @@ validateButton.addEventListener("click", async function () {
   await validatePhoto();
 });
 
-// Fonction pour valider la photo 
+// Fonction pour valider la photo
 async function validatePhoto() {
+  // on récupère les valeurs de chaque input
   const title = document.getElementById("titleInput").value;
   const category = document.getElementById("categorySelect").value;
   const imageInput = document.getElementById("imageInput");
+  // on verifie si les champs sont bon
   if (!title || !category || imageInput.files.length === 0) {
     alert("Veuillez remplir tous les champs du formulaire.");
     return;
@@ -292,7 +295,7 @@ async function validatePhoto() {
     displayWorks(works);
     chargerProjets();
     document.getElementById("titleInput").value = "";
-    closeModals();
+    closeAddPhotoModal();
   } catch (error) {
     console.error("Erreur lors de la requête POST:", error.message);
   }
