@@ -111,6 +111,7 @@ function filterAndDisplayProjects(categoryId) {
       // Filtrer les projets en fonction de la catégorie sélectionnée et les afficher
       data
         .filter((projet) => projet.categoryId === parseInt(categoryId))
+        // La condition projet.categoryId === parseInt(categoryId) garantit que seuls les projets ayant le même identifiant de catégorie que celui sélectionné seront inclus dans le nouveau tableau.
         // parseInt(categoryId) convertit la valeur de la variable categoryId en un nombre entier en JavaScript.
         .forEach((projet) => {
           // Créer les éléments HTML pour chaque projet

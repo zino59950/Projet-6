@@ -21,7 +21,8 @@ function closeModal() {
 //-----------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------
 // Fonction pour supprimer un projet du DOM et du serveur en utilisant l'API
-async function deleteProject(itemId) {
+async function deleteProject(itemId) { 
+  // Une fonction asynchrone (async) est une fonction JavaScript qui permet l'exécution de tâches sans bloquer le reste du code, facilitant ainsi le traitement de plusieurs opérations en parallèle.
   try {
     // Effectuer une requête HTTP DELETE pour supprimer le projet du serveur
     const response = await fetch(`http://localhost:5678/api/works/${itemId}`, {
@@ -101,6 +102,7 @@ function displayWorks(works) {
 //-----------------------------------------------------------------------------------------
 // Fonction pour récupérer les œuvres depuis l'API
 async function getWorksFromAPI() {
+  // Une fonction asynchrone (async) est une fonction JavaScript qui permet l'exécution de tâches sans bloquer le reste du code, facilitant ainsi le traitement de plusieurs opérations en parallèle.
   try {
     // Effectuer une requête HTTP GET pour récupérer les œuvres depuis l'API
     const response = await fetch("http://localhost:5678/api/works");
@@ -229,7 +231,7 @@ function displayImage() {
       // Ajouter l'élément image à l'élément de prévisualisation
       preview.appendChild(img);
 
-      // Masquer les éléments lorsque l'image est affichée (fonction non fournie dans le code)
+      // Masquer les éléments lorsque l'image est affichée 
       hideInputImage();
 
       // Afficher l'élément imagePreview en supprimant la classe "hide"
@@ -320,6 +322,7 @@ validateButton.addEventListener("click", async function () {
 });
 // Fonction pour valider la photo
 async function validatePhoto() {
+  // Une fonction asynchrone (async) est une fonction JavaScript qui permet l'exécution de tâches sans bloquer le reste du code, facilitant ainsi le traitement de plusieurs opérations en parallèle.
   // Récupérer les valeurs de chaque input du formulaire
   const title = document.getElementById("titleInput").value;
   const category = document.getElementById("categorySelect").value;

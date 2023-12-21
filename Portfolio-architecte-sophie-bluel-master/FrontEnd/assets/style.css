@@ -355,7 +355,7 @@ button#addPhotoBtn {
 div#worksContainer {
     display: flex;
     flex-wrap: wrap;
-    gap: 29px;
+    gap: 37px;
     margin-top: 20px;
 }
 /* Ajoutez ceci à votre feuille de style CSS existante ou créez-en une nouvelle */
