@@ -25,7 +25,7 @@ function chargerProjets() {
         // Créer un élément "img" pour afficher l'image du projet
         const img = document.createElement("img");
         img.src = projet.imageUrl; // Définir la source de l'image
-        img.alt = projet.title; // Définir le texte alternatif de l'image
+        
 
         // Créer un élément "figcaption" pour afficher le titre du projet
         const figcaption = document.createElement("figcaption");
@@ -111,12 +111,13 @@ function filterAndDisplayProjects(categoryId) {
       // Filtrer les projets en fonction de la catégorie sélectionnée et les afficher
       data
         .filter((projet) => projet.categoryId === parseInt(categoryId))
+        // parseInt(categoryId) convertit la valeur de la variable categoryId en un nombre entier en JavaScript.
         .forEach((projet) => {
           // Créer les éléments HTML pour chaque projet
           const figure = document.createElement("figure");
           const img = document.createElement("img");
           img.src = projet.imageUrl;
-          img.alt = projet.title;
+
           const figcaption = document.createElement("figcaption");
           figcaption.textContent = projet.title;
 

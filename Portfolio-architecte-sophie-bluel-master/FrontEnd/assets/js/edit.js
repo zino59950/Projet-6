@@ -159,7 +159,7 @@ const checkInputs = () => {
   // Récupérer les valeurs des champs du formulaire
   const title = document.getElementById("titleInput").value.trim();
   const category = document.getElementById("categorySelect").value.trim();
-  const imageInput = document.getElementById("imageInput").value.trim();
+  // value.trim() est utilisé pour nettoyer (supprimer les espaces blancs au début et à la fin) de la valeur d'un champ de saisie.
 
   // Vérifier si les valeurs sont vides
   if (title === "" || category === "" || imageInput.length === 0) {
@@ -195,41 +195,66 @@ titleInput.addEventListener("change", function () {
 
 // Fonction pour afficher l'image sélectionnée
 function displayImage() {
+  // Récupérer l'élément d'entrée de type fichier (input)
   const input = document.getElementById("imageInput");
+
+  // Récupérer l'élément de prévisualisation de l'image
   const preview = document.getElementById("imagePreview");
+
+  // Supprimer tous les enfants de l'élément de prévisualisation
   while (preview.firstChild) {
     preview.removeChild(preview.firstChild);
   }
+
+  // Récupérer le fichier sélectionné par l'utilisateur
   const file = input.files[0];
+
+  // Vérifier si un fichier a été sélectionné
   if (file) {
+    // Créer une instance de FileReader pour lire le contenu du fichier
     const reader = new FileReader();
+
+    // Définir une fonction de rappel qui sera appelée lorsque la lecture est terminée
     reader.onload = function (e) {
+      // Créer un élément image pour afficher la prévisualisation
       const img = document.createElement("img");
       img.src = e.target.result;
-      img.style.width = "100%";
-      // Ajouter le style à l'image
+      // img.src = e.target.result; charge l'image sélectionnée en utilisant l'URL résultant de la lecture du fichier.
+
+      img.style.width = "100%"; // Définir la largeur de l'image à 100%
+      
+      // Ajouter une classe pour appliquer un style personnalisé à l'image
       img.classList.add("custom-image-style");
+
+      // Ajouter l'élément image à l'élément de prévisualisation
       preview.appendChild(img);
-      // Masquer les éléments lorsque l'image est affichée
+
+      // Masquer les éléments lorsque l'image est affichée (fonction non fournie dans le code)
       hideInputImage();
-      // Afficher l'élément imagePreview
+
+      // Afficher l'élément imagePreview en supprimant la classe "hide"
       preview.classList.remove("hide");
     };
+
+    // Lire le contenu du fichier en tant que données URL
     reader.readAsDataURL(file);
   }
 }
+
 
 // Fonction pour afficher l'input pour upload une image
 function showInputImage() {
   document.querySelector(".file-label").classList.remove("hide");
   document.querySelector(".description").classList.remove("hide");
   document.querySelector(".custom-icon").classList.remove("hide");
+  // classList.add("hide") est utilisé pour rendre invisible l'élément 
 }
 // Fonction pour masquer l'input quand on a upload une image
 function hideInputImage() {
   document.querySelector(".file-label").classList.add("hide");
   document.querySelector(".description").classList.add("hide");
   document.querySelector(".custom-icon").classList.add("hide");
+    // classList.add("hide") est utilisé pour rendre invisible l'élément 
 }
 
 // OUVERTURE SECONDE MODAL
