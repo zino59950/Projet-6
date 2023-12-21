@@ -5,37 +5,52 @@ const tous = document.querySelector(".tous");
 const galerie = document.querySelector(".gallery");
 // Créez une variable booléenne "isTousClicked" et initialisez-la à "false"
 let isTousClicked = false;
-// Définition de la fonction "chargerProjets" qui récupère les projets depuis une API
+// Définition de la fonction "chargerProjets" pour récupérer et afficher les projets depuis une API
 function chargerProjets() {
-  // Effectuez une requête HTTP GET pour récupérer les données des projets depuis une URL
+  // Effectuer une requête HTTP GET pour récupérer les données des projets depuis l'API
   fetch("http://localhost:5678/api/works")
     .then((response) => response.json()) // Parsez la réponse HTTP en JSON
     .then((data) => {
-      // Réinitialisez le contenu de la galerie à vide
+      // Réinitialiser le contenu de la galerie à vide
       galerie.innerHTML = "";
+
+      // Stocker toutes les œuvres dans la variable "allWorks" (pour une utilisation éventuelle)
       allWorks = data;
-      // Parcourez les données des projets et créez des éléments HTML pour les afficher
+
+      // Parcourir les données des projets et créer des éléments HTML pour les afficher
       data.forEach((projet) => {
+        // Créer un élément "figure" pour chaque projet
         const figure = document.createElement("figure");
+
+        // Créer un élément "img" pour afficher l'image du projet
         const img = document.createElement("img");
-        img.src = projet.imageUrl;
-        img.alt = projet.title;
+        img.src = projet.imageUrl; // Définir la source de l'image
+        img.alt = projet.title; // Définir le texte alternatif de l'image
+
+        // Créer un élément "figcaption" pour afficher le titre du projet
         const figcaption = document.createElement("figcaption");
-        figcaption.textContent = projet.title;
+        figcaption.textContent = projet.title; // Définir le texte du figcaption
+
+        // Ajouter l'élément "img" et "figcaption" à l'élément "figure"
         figure.appendChild(img);
         figure.appendChild(figcaption);
+
+        // Ajouter l'élément "figure" à la galerie
         galerie.appendChild(figure);
+
+        // Afficher toutes les œuvres dans la console
         console.log(allWorks);
       });
     })
     .catch((error) => {
-      // En cas d'erreur, affichez un message d'erreur dans la console
+      // En cas d'erreur, afficher un message d'erreur dans la console
       console.error(
         "Une erreur s'est produite lors de la récupération des données :",
         error
       );
     });
 }
+
 
 // --------------------------------------------------------------------------------------------------------
 
@@ -86,28 +101,33 @@ const categoryButtons = document.querySelectorAll(".category-item");
 // Définition de la fonction "filterAndDisplayProjects" pour filtrer et 
 // afficher des projets en fonction de la catégorie
 function filterAndDisplayProjects(categoryId) {
+  // Effectuer une requête HTTP GET pour récupérer les projets depuis l'API
   fetch("http://localhost:5678/api/works")
-    .then((response) => response.json())
+    .then((response) => response.json()) // Parsez la réponse HTTP en JSON
     .then((data) => {
-      galerie.innerHTML = ""; // Réinitialisez le contenu de la galerie
+      // Réinitialiser le contenu de la galerie à vide
+      galerie.innerHTML = "";
 
-      // Filtrez les projets en fonction de la catégorie sélectionnée et affichez-les
+      // Filtrer les projets en fonction de la catégorie sélectionnée et les afficher
       data
         .filter((projet) => projet.categoryId === parseInt(categoryId))
         .forEach((projet) => {
+          // Créer les éléments HTML pour chaque projet
           const figure = document.createElement("figure");
           const img = document.createElement("img");
           img.src = projet.imageUrl;
           img.alt = projet.title;
           const figcaption = document.createElement("figcaption");
           figcaption.textContent = projet.title;
+
+          // Ajouter les éléments au DOM
           figure.appendChild(img);
           figure.appendChild(figcaption);
           galerie.appendChild(figure);
         });
     })
     .catch((error) => {
-      // En cas d'erreur, affichez un message d'erreur dans la console
+      // En cas d'erreur, afficher un message d'erreur dans la console
       console.error(
         "Une erreur s'est produite lors de la récupération des données :",
         error
@@ -115,61 +135,73 @@ function filterAndDisplayProjects(categoryId) {
     });
 }
 
-// --------------------------------------------------------------------------------------------------------------
 
-// Ajoutez des écouteurs d'événement aux boutons de catégorie pour filtrer et afficher les projets
-categoryButtons.forEach((button) => {
-  button.addEventListener("click", function () {
-    const categoryId = this.getAttribute("data-category");
-    filterAndDisplayProjects(categoryId);
-    isTousClicked = false; // Réglez "isTousClicked" à "false"
-    tous.style.backgroundColor = "white";
-    tous.style.color = "#1D6154";
-  });
-});
-
+// --------------------------------------------------------------------------------------
 // --------------------------------------------------------------------------------------------------------
 
 // Ajoutez des écouteurs d'événement aux boutons de catégorie pour gérer le style lors du clic
 categoryButtons.forEach((button) => {
   button.addEventListener("click", function () {
+    // Récupérer l'ID de la catégorie à partir de l'attribut "data-category"
     const categoryId = this.getAttribute("data-category");
+
+    // Appeler la fonction pour filtrer et afficher les projets en fonction de la catégorie
     filterAndDisplayProjects(categoryId);
-    isTousClicked = false; // Réglez "isTousClicked" à "false"
+
+    // Réinitialiser la variable "isTousClicked" à "false"
+    isTousClicked = false;
+
+    // Réinitialiser le style de fond et de texte du bouton "Tous"
     tous.style.backgroundColor = "white";
     tous.style.color = "#1D6154";
 
-    // Réinitialisez le style de fond et de texte de tous les boutons de catégorie
+    // Réinitialiser le style de fond et de texte de tous les boutons de catégorie
     categoryButtons.forEach((btn) => {
       btn.style.backgroundColor = "white";
       btn.style.color = "#1D6154";
     });
 
-    // Changez le style de fond du bouton cliqué
+    // Changer le style de fond et de texte du bouton cliqué
     this.style.backgroundColor = "#1D6154";
     this.style.color = "white";
   });
 });
 
+
 // --------------------------------------------------------------------------------------------------------
 
 //BOUTTON LOGOUT QUI REMPLACE LE BOUTON LOGIN--
 const modifier = document.querySelector(".modifier");
+
+// Sélectionner l'élément avec la classe "category-list"
 const categorylist = document.querySelector(".category-list");
-// si on est connecté on affiche le bouton modifier et logout et on cache le bouton login et 
-// les filtres
+
+// Vérifier si l'utilisateur est connecté en vérifiant la présence du jeton d'authentification
 if (localStorage.token) {
+  // Si connecté, masquer la liste des catégories et le bouton de login,
+  // et afficher le bouton de modification et de déconnexion
   document.getElementById("categoryList").style.display = "none";
   document.querySelector(".btn-login").style.display = "none";
   document.querySelector(".mode-edit").style.display = "block";
+
+  // Sélectionner l'élément avec la classe "btn-logout"
   const logout = document.querySelector(".btn-logout");
+
+  // Afficher le bouton de déconnexion
   logout.style.display = "block";
+
+  // Ajouter un écouteur d'événement au bouton de déconnexion
   logout.addEventListener("click", function () {
+    // Supprimer le jeton d'authentification du stockage local
     localStorage.removeItem("token");
+
+    // Recharger la page pour effectuer la déconnexion
     window.location.reload();
   });
 } else {
+  // Si non connecté, masquer le bouton de modification
   document.querySelector(".modifier").style.display = "none";
 }
+
 
 export { chargerProjets };

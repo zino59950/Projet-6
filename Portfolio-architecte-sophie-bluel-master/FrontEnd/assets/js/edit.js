@@ -23,74 +23,106 @@ function closeModal() {
 // Fonction pour supprimer un projet du DOM et du serveur en utilisant l'API
 async function deleteProject(itemId) {
   try {
+    // Effectuer une requête HTTP DELETE pour supprimer le projet du serveur
     const response = await fetch(`http://localhost:5678/api/works/${itemId}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${localStorage.token}`,
       },
     });
+
+    // Vérifier si la suppression sur le serveur a réussi
     if (response.status === 204) {
+      // Si la suppression a réussi, afficher un message de succès dans la console
       console.log("Succès : Le projet a été supprimé.");
-      // on filtre et on retourne tous les éléments qui n'ont pas l'id qu'on supprime
+
+      // Filtrer les projets pour exclure celui qui vient d'être supprimé
       works = works.filter((work) => {
         return work.id != itemId;
       });
+
+      // Mettre à jour l'affichage des œuvres après la suppression
       displayWorks(works);
+
+      // Recharger les projets depuis le serveur pour mettre à jour la liste complète
       chargerProjets();
     } else {
+      // Si la suppression a échoué, afficher un message d'erreur dans la console
       console.error("Erreur : Échec de la suppression du projet.");
     }
   } catch (error) {
+    // Gérer les erreurs lors de la suppression du projet
     console.error("Erreur :", error);
   }
 }
+
 //-----------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------
 // Fonction pour afficher les œuvres dans la modal
 function displayWorks(works) {
+  // Récupérer l'élément du conteneur des œuvres dans la modal
   const worksContainer = document.getElementById("worksContainer");
-  // Vide le contenu précédent de l'élément
+
+  // Vider le contenu précédent de l'élément
   worksContainer.innerHTML = "";
+
   // Boucle à travers les œuvres et les ajoute à l'élément
   works.forEach(function (work) {
+    // Créer un nouvel élément div pour chaque œuvre
     const workElement = document.createElement("div");
+
+    // Ajouter le contenu HTML à l'élément div
     workElement.innerHTML = `
-            <div style="display: flex; justify-content: flex-end;">
-                <img src="${work.imageUrl}" alt="${work.title}" style="width: 78.12px; height: 104.08px;">
-                <div class="delete-icon" style="margin-left: -20px;z-index:999";>
-                  <i class="fa-regular fa-trash-can"></i>
-                </div>
-            </div>
-            <!-- Ajoutez d'autres détails de l'œuvre ici -->
-        `;
-    // Ajoutez l'ID de l'œuvre comme attribut de données pour la suppression
+      <div style="display: flex; justify-content: flex-end;">
+        <img src="${work.imageUrl}" alt="${work.title}" style="width: 78.12px; height: 104.08px;">
+        <div class="delete-icon" style="margin-left: -20px;z-index:999";>
+          <i class="fa-regular fa-trash-can"></i>
+        </div>
+      </div>
+      <!-- Ajoutez d'autres détails de l'œuvre ici -->
+    `;
+
+    // Ajouter l'ID de l'œuvre comme attribut de données pour la suppression
     workElement.dataset.id = work.id;
-    // on selectionne l'icon delete et on lui ajoute un click pour supprimer
+
+    // Sélectionner l'icône de suppression et ajouter un écouteur de clic pour la suppression
     workElement.querySelector(".delete-icon").addEventListener("click", () => {
       deleteProject(work.id);
     });
+
+    // Ajouter l'élément div à l'élément du conteneur des œuvres
     worksContainer.appendChild(workElement);
   });
 }
+
 //-----------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------
 // Fonction pour récupérer les œuvres depuis l'API
 async function getWorksFromAPI() {
   try {
+    // Effectuer une requête HTTP GET pour récupérer les œuvres depuis l'API
     const response = await fetch("http://localhost:5678/api/works");
+
+    // Vérifier si la requête GET a réussi
     if (!response.ok) {
       throw new Error(
         "Erreur lors de la récupération des œuvres depuis l'API."
       );
     }
+
+    // Récupérer les données JSON de la réponse
     works = await response.json();
-    displayWorks(works); // Appel de la fonction pour afficher les œuvres
+
+    // Appeler la fonction pour afficher les œuvres
+    displayWorks(works);
   } catch (error) {
+    // Gérer les erreurs lors de la récupération des œuvres
     console.error("Erreur lors de la récupération des œuvres:", error.message);
   }
 }
+
 document.addEventListener("DOMContentLoaded", function () {
   // Récupère la référence de la modal
   const modal = document.getElementById("myModal");
@@ -122,21 +154,25 @@ function openModal() {
   showInputImage();
 }
 
-// Vérifier si les champs sont remplis
+// Fonction pour vérifier si les champs du formulaire sont remplis
 const checkInputs = () => {
-  // Récupérer les valeurs des champs
+  // Récupérer les valeurs des champs du formulaire
   const title = document.getElementById("titleInput").value.trim();
   const category = document.getElementById("categorySelect").value.trim();
   const imageInput = document.getElementById("imageInput").value.trim();
+
   // Vérifier si les valeurs sont vides
   if (title === "" || category === "" || imageInput.length === 0) {
+    // Si au moins un champ est vide, désactiver le bouton de validation
     document.querySelector(".validateButton").classList.remove("active");
-    return false;
+    return false; // Retourner false car les champs ne sont pas tous remplis
   } else {
+    // Si tous les champs sont remplis, activer le bouton de validation
     document.querySelector(".validateButton").classList.add("active");
-    return true;
+    return true; // Retourner true car tous les champs sont remplis
   }
 };
+
 
 // Sélectionnez l'élément input
 const imageInput = document.getElementById("imageInput");
@@ -257,25 +293,33 @@ const validateButton = document.querySelector(".validateButton");
 validateButton.addEventListener("click", async function () {
   await validatePhoto();
 });
-
 // Fonction pour valider la photo
 async function validatePhoto() {
-  // on récupère les valeurs de chaque input
+  // Récupérer les valeurs de chaque input du formulaire
   const title = document.getElementById("titleInput").value;
   const category = document.getElementById("categorySelect").value;
   const imageInput = document.getElementById("imageInput");
-  // on verifie si les champs sont bon
+
+  // Vérifier si les champs du formulaire sont remplis correctement
   if (!title || !category || imageInput.files.length === 0) {
     alert("Veuillez remplir tous les champs du formulaire.");
     return;
   }
+
+  // Récupérer le fichier image du formulaire
   const imageFile = imageInput.files[0];
+
+  // Créer un objet FormData pour envoyer les données du formulaire
   const formData = new FormData();
   formData.append("title", title);
   formData.append("category", category);
   formData.append("image", imageFile);
+
   try {
+    // Récupérer le jeton d'authentification stocké localement
     const authToken = localStorage.token;
+
+    // Effectuer une requête HTTP POST pour ajouter la nouvelle photo
     const response = await fetch("http://localhost:5678/api/works", {
       method: "POST",
       body: formData,
@@ -283,17 +327,25 @@ async function validatePhoto() {
         Authorization: "Bearer " + authToken,
       },
     });
+
+    // Vérifier si la requête POST a réussi
     if (!response.ok) {
       throw new Error(
         "Erreur lors de la requête POST. Veuillez vérifier vos informations d'authentification."
       );
     }
+
+    // Récupérer les données JSON de la réponse
     const data = await response.json();
-    // Ajoutez la nouvelle photo à la liste des projets
+
+    // Ajouter la nouvelle photo à la liste des projets
     works.push(data);
 
+    // Mettre à jour l'affichage des projets
     displayWorks(works);
     chargerProjets();
+
+    // Réinitialiser les champs du formulaire et fermer la fenêtre modale
     document.getElementById("titleInput").value = "";
     closeAddPhotoModal();
   } catch (error) {
