@@ -9,7 +9,7 @@ let isTousClicked = false;
 function chargerProjets() {
   // Effectuer une requête HTTP GET pour récupérer les données des projets depuis l'API
   fetch("http://localhost:5678/api/works")
-    .then((response) => response.json()) // Parsez la réponse HTTP en JSON
+    .then((response) => response.json()) // convertie la réponse HTTP en JSON
     .then((data) => {
       // Réinitialiser le contenu de la galerie à vide
       galerie.innerHTML = "";
@@ -103,8 +103,8 @@ const categoryButtons = document.querySelectorAll(".category-item");
 function filterAndDisplayProjects(categoryId) {
   // Effectuer une requête HTTP GET pour récupérer les projets depuis l'API
   fetch("http://localhost:5678/api/works")
-    .then((response) => response.json()) // Parsez la réponse HTTP en JSON
-    .then((data) => {
+    .then((response) => response.json()) // convertie la réponse HTTP en JSON
+    .then((data) => { //pour manipuler les donnée récupérer du serveur
       // Réinitialiser le contenu de la galerie à vide
       galerie.innerHTML = "";
 

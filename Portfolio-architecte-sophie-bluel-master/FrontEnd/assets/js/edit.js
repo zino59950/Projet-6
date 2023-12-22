@@ -347,14 +347,18 @@ async function validatePhoto() {
     // Récupérer le jeton d'authentification stocké localement
     const authToken = localStorage.token;
 
-    // Effectuer une requête HTTP POST pour ajouter la nouvelle photo
+    // Effectue une requête HTTP POST pour ajouter une nouvelle photo
     const response = await fetch("http://localhost:5678/api/works", {
+      // Spécifie la méthode de la requête comme étant POST
       method: "POST",
+      // Utilise l'objet FormData contenant les données de la nouvelle photo comme corps de la requête
       body: formData,
+      // Inclut l'en-tête d'autorisation avec le jeton (token) d'authentification Bearer
       headers: {
         Authorization: "Bearer " + authToken,
       },
     });
+
 
     // Vérifier si la requête POST a réussi
     if (!response.ok) {

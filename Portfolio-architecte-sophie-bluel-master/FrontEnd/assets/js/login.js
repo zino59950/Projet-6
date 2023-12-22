@@ -18,22 +18,29 @@ form.addEventListener('submit', function (event) {
     return;
   }
 
-  // Envoi des données d'authentification à l'API
-  fetch('http://localhost:5678/api/users/login', {
-    method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      email: email,
-      password: password
-    })
+// Effectue une requête HTTP POST vers l'API de login des utilisateurs
+fetch('http://localhost:5678/api/users/login', {
+  // Spécifie la méthode de la requête comme étant POST
+  method: 'POST', 
+  // La méthode HTTP POST est utilisée pour envoyer des données au serveur en vue de créer une nouvelle ressource
+  // Définit les en-têtes de la requête, indiquant que le serveur doit répondre au format JSON
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json'
+  },
+  // Convertit les données de login (email et mot de passe) 
+  // en format JSON et les envoie dans le corps de la requête
+  body: JSON.stringify({
+    email: email,
+    password: password
   })
-  .then(response => response.json())
-  .then(data => {
+})
+
+  .then(response => response.json()) // convertie la réponse HTTP en JSON
+  .then(data => {//pour manipuler les donnée récupérer du serveur
     console.log(data);
-    if (data.token) {
+    if (data.token) { 
+      // Cette condition est vérifiée si un jeton (token) est présent dans les données
       localStorage.setItem("token", data.token);
       // Authentification réussie : rediriger l'utilisateur vers la page d'accueil
       window.location.href = 'index.html';
